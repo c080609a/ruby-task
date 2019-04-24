@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Keeps local campaigns data
 class LocalData
   CAMPAIGNS = [
     {

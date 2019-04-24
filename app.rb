@@ -3,12 +3,16 @@
 require 'awesome_print'
 require './lib/services/parse_data'
 require './lib/services/compare_data'
+require './lib/data/finder'
 
+# Main application class
 class App
   class << self
     def run
-      parsed_data = ParseData.call
-      ap CompareData.call(parsed_data), indent: -2, index: false
+      raw_data = FetchData.call
+      parsed_data = ParseData.call(raw_data)
+      result = CompareData.call(parsed_data, Finder.new)
+      ap result, indent: -2, index: false
     rescue StandardError => e
       ap "Something went wrong: #{e.message}"
     end

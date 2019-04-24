@@ -3,8 +3,6 @@
 require 'spec_helper'
 require 'services/parse_data'
 describe ParseData do
-  subject { described_class.call }
-
   let(:raw_data) do
     '{ "ads": [ { "reference": "1", "status": "enabled", "description": '\
     '"Description for campaign 11" }, { "reference": "2", "status": "disabled", '\
@@ -12,9 +10,7 @@ describe ParseData do
     '"enabled", "description": "Description for campaign 13" } ] }'
   end
 
-  before do
-    allow(FetchData).to receive(:call).and_return(raw_data)
-  end
+  subject { described_class.call(raw_data) }
 
   context 'when receive data' do
     it 'returns parsed ads data' do
