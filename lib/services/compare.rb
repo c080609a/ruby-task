@@ -31,13 +31,13 @@ class Compare < ApplicationService
 
   def compare(remote_data)
     [].tap do |diff_result|
-      remote_data.each do |item|
-        reference = item['reference']
+      remote_data.each do |remote_item|
+        reference = remote_item['reference']
         local_item = find_by_reference(reference)
-        item_diff = diff(item, local_item)
+        item_diff = diff(remote_item, local_item)
         next if item_diff.empty?
 
-        diff_result << build_response(reference, item_diff, item, local_item)
+        diff_result << build_response(reference, item_diff, remote_item, local_item)
       end
     end
   end

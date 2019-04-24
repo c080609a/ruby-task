@@ -3,7 +3,6 @@
 require 'spec_helper'
 require 'services/compare'
 describe Compare do
-  subject { described_class.call(remote_data) }
 
   let(:remote_data) do
     [
@@ -27,12 +26,12 @@ describe Compare do
 
   let(:status) { 'disabled' }
   let(:description) { 'Just another description' }
+  let(:diff) { [] }
+
+  subject { described_class.call(remote_data) }
 
   context 'when compare data' do
     context 'and local and remote are equal' do
-      let(:diff) do
-        []
-      end
       it 'returns empty array' do
         expect(subject).to eq(diff)
       end
@@ -73,6 +72,30 @@ describe Compare do
           }
         ]
       end
+
+      it 'returns array of diffs' do
+        expect(subject).to eq(diff)
+      end
+    end
+
+    context 'and there is extra remote data' do
+      let(:another_remote_data) do
+        remote_data.push(
+          'reference' => '4',
+          'status' => 'disabled',
+          'description' => 'description'
+        )
+      end
+
+      subject { described_class.call(remote_data) }
+
+      it 'returns array of diffs' do
+        expect(subject).to eq(diff)
+      end
+    end
+
+    context 'and there is no remote data' do
+      let(:remote_data) { [] }
 
       it 'returns array of diffs' do
         expect(subject).to eq(diff)
