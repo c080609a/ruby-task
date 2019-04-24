@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'services/compare'
-describe Compare do
-
+require 'services/compare_data'
+describe CompareData do
   let(:remote_data) do
     [
       {
@@ -14,7 +13,7 @@ describe Compare do
       {
         'reference' => '2',
         'status' => status,
-        'description' => 'Other description for campain'
+        'description' => 'Other description for campaign'
       },
       {
         'reference' => '3',

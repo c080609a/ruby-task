@@ -1,28 +1,10 @@
 # frozen_string_literal: true
 
 require 'json'
-require 'pry'
 require_relative 'application_service'
+require_relative '../data/local_data'
 
-class Compare < ApplicationService
-  LOCAL_DATA = [
-    {
-      'reference' => '1',
-      'status' => 'enabled',
-      'description' => 'Description for campaign 11'
-    },
-    {
-      'reference' => '2',
-      'status' => 'disabled',
-      'description' => 'Other description for campain'
-    },
-    {
-      'reference' => '3',
-      'status' => 'disabled',
-      'description' => 'Just another description'
-    }
-  ].freeze
-
+class CompareData < ApplicationService
   def call(remote_data)
     compare(remote_data)
   end
@@ -43,7 +25,7 @@ class Compare < ApplicationService
   end
 
   def diff(remote_item, local_item)
-    (remote_item.keys & local_item.keys).reject { |k| local_item[k] == remote_item[k] }
+    (remote_item.keys & local_item.keys).reject { |k| remote_item[k] == local_item[k] }
   end
 
   def find_by_reference(reference)
@@ -71,6 +53,6 @@ class Compare < ApplicationService
   end
 
   def local_data
-    LOCAL_DATA
+    LocalData::CAMPAIGNS
   end
 end

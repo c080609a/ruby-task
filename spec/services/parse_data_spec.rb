@@ -17,7 +17,7 @@ describe ParseData do
   end
 
   context 'when receive data' do
-    it 'returns parsed data' do
+    it 'returns parsed ads data' do
       expect(subject).to eq(JSON.parse(raw_data)['ads'])
     end
   end
