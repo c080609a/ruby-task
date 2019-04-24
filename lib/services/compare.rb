@@ -24,23 +24,21 @@ class Compare < ApplicationService
   ].freeze
 
   def call(remote_data)
-    @remote_data = remote_data
-    @diff_result = []
-    compare
-    diff_result
+    compare(remote_data)
   end
 
   private
 
-  attr_accessor :diff_result
-  attr_reader :remote_data
+  def compare(remote_data)
+    [].tap do |diff_result|
+      remote_data.each do |item|
+        reference = item['reference']
+        local_item = find_by_reference(reference)
+        item_diff = diff(item, local_item)
+        next if item_diff.empty?
 
-  def compare
-    remote_data.each do |item|
-      reference = item['reference']
-      local_item = find_by_reference(reference)
-      item_diff = diff(item, local_item)
-      diff_result << build_response(reference, item_diff, item, local_item) if item_diff.any?
+        diff_result << build_response(reference, item_diff, item, local_item)
+      end
     end
   end
 
