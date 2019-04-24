@@ -27,7 +27,7 @@ class Compare < ApplicationService
     @remote_data = remote_data
     @diff_result = []
     compare
-    p diff_result
+    diff_result
   end
 
   private

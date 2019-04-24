@@ -6,13 +6,13 @@ require_relative 'application_service'
 
 class ParseData < ApplicationService
   def call
-    parse_data['ads']
+    parse_data
   end
 
   private
 
   def parse_data
-    JSON.parse(data)
+    JSON.parse(data)['ads']
   end
 
   def data
