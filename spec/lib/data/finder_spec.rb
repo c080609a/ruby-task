@@ -30,9 +30,7 @@ describe Finder do
     end
 
     context 'when local data is present' do
-      before do
-        stub_const('LocalData::CAMPAIGNS', campaigns)
-      end
+      before { stub_const('LocalData::CAMPAIGNS', campaigns) }
 
       context 'and campaign with reference exists' do
         it 'returns reference' do
