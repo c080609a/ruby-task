@@ -1,7 +1,7 @@
 ### Comments from Jacek
 
-- To run application just type `ruby app.rb`
-- To run specs and RuboCop use `rake`
+- You can run this app using `bin/run`
+- Use `rake` command to run specs and rubocop tests
 
 ### Introduction
 First of all, thank you for taking the time to complete this test task!
