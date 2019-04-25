@@ -1,3 +1,8 @@
+### Comments from Jacek
+
+- To run application just type `ruby app.rb`
+- To run specs and RuboCop use `rake`
+
 ### Introduction
 First of all, thank you for taking the time to complete this test task!
 The purpose of the task is to get an idea of your development style: the way you structure code, automated tests you add etc.
